@@ -1,0 +1,23 @@
+[project]
+name = "nova-graph"
+version = "0.1.0"
+description = "Proprietary knowledge graph and GraphRAG layer for the NOVA treasury intelligence platform (Delta Lake + PostgreSQL/pgvector + Elasticsearch)."
+requires-python = ">=3.11"
+dependencies = [
+  "pydantic>=2.6",
+  "psycopg[binary,pool]>=3.1",
+  "pgvector>=0.3",
+  "elasticsearch>=8.12",
+  "langgraph>=0.2",
+  "langgraph-checkpoint-postgres>=2.0",
+  "networkx>=3.2",
+  "numpy>=1.26",
+  "pyyaml>=6.0",
+]
+
+[project.optional-dependencies]
+databricks = ["pyspark>=3.5", "graphframes>=0.6", "igraph>=0.11", "leidenalg>=0.10"]
+dev = ["pytest>=8", "ruff>=0.4"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

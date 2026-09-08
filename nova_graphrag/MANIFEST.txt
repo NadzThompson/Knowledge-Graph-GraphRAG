@@ -1,0 +1,37 @@
+NOVA GraphRAG reference implementation
+
+Core package:
+- models.py
+- graph_engine.py
+- graph_store/base.py
+- graph_store/memory.py
+- graph_store/delta.py
+- retrieval/base.py
+- retrieval/memory.py
+- retrieval/fusion.py
+- retrieval/elastic.py
+- retrieval/pgvector.py
+- graphrag/planner.py
+- graphrag/engine.py
+- ingestion/compiler.py
+- api/main.py
+
+Schemas:
+- sql/delta_schema.sql
+- sql/postgres_pgvector_schema.sql
+
+Configuration:
+- config/ontology.yaml
+
+Documentation:
+- README.md
+- docs/ARCHITECTURE.md
+- docs/DATA_MODEL.md
+- docs/GRAPHRAG.md
+- docs/IMPLEMENTATION_GUIDE.md
+- docs/ADAPTERS.md
+- docs/SECURITY_AND_GOVERNANCE.md
+- docs/OPERATIONS.md
+- docs/DEPLOYMENT.md
+- docs/TESTING_STRATEGY.md
+- docs/ROADMAP.md

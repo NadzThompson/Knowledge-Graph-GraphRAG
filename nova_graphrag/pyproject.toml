@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "nova-graphrag"
+version = "0.1.0"
+description = "NOVA proprietary Treasury knowledge graph and GraphRAG engine"
+requires-python = ">=3.11"
+dependencies = [
+  "pydantic>=2.7",
+  "pyyaml>=6.0",
+  "fastapi>=0.115",
+  "uvicorn>=0.30",
+]
+
+[project.optional-dependencies]
+pgvector = ["psycopg[binary]>=3.2", "pgvector>=0.3"]
+elastic = ["elasticsearch>=8.15"]
+databricks = ["databricks-sql-connector>=3.3", "pyspark>=3.5"]
+dev = ["pytest>=8.2"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]

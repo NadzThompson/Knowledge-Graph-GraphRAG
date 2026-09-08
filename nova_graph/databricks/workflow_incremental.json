@@ -1,0 +1,6 @@
+{
+  "name": "nova-graph-incremental",
+  "schedule": {"quartz_cron_expression": "0 0 * ? * MON-FRI", "timezone_id": "America/Toronto"},
+  "tasks": [{"task_key": "incremental", "existing_cluster_note": "small always-on cluster or serverless",
+             "notebook_task": {"notebook_path": "/Repos/nova/nova_graph/databricks/notebooks/01_build_graph", "base_parameters": {"mode": "incremental"}}}]
+}

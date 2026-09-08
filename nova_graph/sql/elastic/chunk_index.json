@@ -1,0 +1,28 @@
+{
+  "settings": {
+    "index": { "number_of_shards": 6, "number_of_replicas": 1, "refresh_interval": "30s" },
+    "analysis": { "analyzer": { "treasury_en": { "type": "custom", "tokenizer": "standard", "filter": ["lowercase", "english_stemmer", "asciifolding"] } },
+                  "filter": { "english_stemmer": { "type": "stemmer", "language": "english" } } }
+  },
+  "mappings": {
+    "properties": {
+      "chunk_id":      { "type": "keyword" },
+      "doc_id":        { "type": "keyword" },
+      "doc_title":     { "type": "text", "analyzer": "treasury_en", "fields": { "raw": { "type": "keyword" } } },
+      "doc_type":      { "type": "keyword" },
+      "ordinal":       { "type": "integer" },
+      "text":          { "type": "text", "analyzer": "treasury_en" },
+      "text_elser":    { "type": "sparse_vector" },
+      "entity_ids":    { "type": "keyword" },
+      "entity_names":  { "type": "text", "analyzer": "treasury_en" },
+      "community_ids": { "type": "keyword" },
+      "masking_tier":  { "type": "byte" },
+      "regulator":     { "type": "keyword" },
+      "jurisdiction":  { "type": "keyword" },
+      "effective_date":{ "type": "date" },
+      "valid_to":      { "type": "date" },
+      "source_system": { "type": "keyword" },
+      "metadata":      { "type": "object", "enabled": false }
+    }
+  }
+}

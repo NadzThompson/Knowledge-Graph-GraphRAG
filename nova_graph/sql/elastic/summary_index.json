@@ -1,0 +1,11 @@
+{
+  "settings": { "index": { "number_of_shards": 2, "number_of_replicas": 1 } },
+  "mappings": {
+    "properties": {
+      "community_id": { "type": "keyword" }, "level": { "type": "byte" }, "parent_id": { "type": "keyword" },
+      "title": { "type": "text" }, "summary": { "type": "text" }, "summary_elser": { "type": "sparse_vector" },
+      "key_findings": { "type": "text" }, "rating": { "type": "float" }, "member_count": { "type": "integer" },
+      "masking_tier": { "type": "byte" }, "run_id": { "type": "keyword" }
+    }
+  }
+}

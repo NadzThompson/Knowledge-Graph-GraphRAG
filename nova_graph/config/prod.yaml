@@ -1,0 +1,32 @@
+delta:
+  catalog: nova
+  schema: graph_gold
+  chunk_table: nova.silver.doc_chunks
+  structured_sources:
+    le_master: nova.silver.legal_entity_master
+    gl_master: nova.silver.gl_master
+    report_lines: nova.silver.reg_report_lines
+    report_line_gl_map: nova.silver.reg_report_line_gl_map
+    counterparties: nova.silver.counterparty_master
+    exposures: nova.silver.exposures_daily
+    metrics: nova.silver.treasury_metrics
+    metric_report_map: nova.silver.metric_report_map
+postgres:
+  schema: graph
+  embedding_dim: 1536
+  max_hops_served: 3
+elastic:
+  hosts: ["https://elastic.example.internal:9243"]
+  chunk_index: nova-chunks
+  summary_index: nova-community-summaries
+llm:
+  extraction_model: gpt-5
+  summary_model: claude-sonnet-5
+  embedding_model: text-embedding-3-large
+  max_concurrency: 48
+optional:
+  neo4j_enabled: false
+  redis_enabled: false
+  neo4j_hop_threshold: 4
+hot_lookback_days: 730
+max_degree_cap: 5000

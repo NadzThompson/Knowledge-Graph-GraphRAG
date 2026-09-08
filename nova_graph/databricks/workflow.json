@@ -1,0 +1,18 @@
+{
+  "name": "nova-graph-build",
+  "tags": {"app_code": "APP0", "owner": "graph-platform"},
+  "email_notifications": {"on_failure": ["nova-platform@example.com"]},
+  "schedule": {"quartz_cron_expression": "0 0 2 ? * SUN", "timezone_id": "America/Toronto"},
+  "job_clusters": [{
+    "job_cluster_key": "graph",
+    "new_cluster": {"spark_version": "15.4.x-scala2.12", "node_type_id": "Standard_E16ds_v5", "autoscale": {"min_workers": 4, "max_workers": 32},
+                    "spark_conf": {"spark.databricks.delta.optimizeWrite.enabled": "true"},
+                    "libraries_note": "install nova-graph[databricks] wheel; graphframes from Maven graphframes:graphframes:0.8.3-spark3.5-s_2.12"}
+  }],
+  "tasks": [
+    {"task_key": "full_build", "job_cluster_key": "graph",
+     "notebook_task": {"notebook_path": "/Repos/nova/nova_graph/databricks/notebooks/01_build_graph", "base_parameters": {"mode": "full"}}},
+    {"task_key": "validate", "depends_on": [{"task_key": "full_build"}], "job_cluster_key": "graph",
+     "notebook_task": {"notebook_path": "/Repos/nova/nova_graph/databricks/notebooks/02_validate_graph"}}
+  ]
+}

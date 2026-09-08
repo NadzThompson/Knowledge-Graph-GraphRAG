@@ -1,0 +1,57 @@
+version: 0.1
+entity_types:
+  Regulation:
+    description: External regulatory rule, standard or guidance.
+  Policy:
+    description: Internal policy or standard.
+  Requirement:
+    description: Atomic obligation derived from regulation or policy.
+  Metric:
+    description: Treasury or risk metric such as NCF, LCR, NSFR, CET1 or EVE.
+  Calculation:
+    description: Deterministic calculation or transformation.
+  DataElement:
+    description: Canonical business or technical data element.
+  DataAsset:
+    description: Table, view, file, API or source system object.
+  LegalEntity:
+    description: Legal entity within the banking group.
+  Counterparty:
+    description: External or internal counterparty.
+  Product:
+    description: Product, instrument or balance classification.
+  Position:
+    description: Position or exposure.
+  Account:
+    description: Account or ledger-level object.
+  Collateral:
+    description: Collateral asset or pool.
+  Currency:
+    description: Currency.
+  Scenario:
+    description: Stress or what-if scenario.
+  Limit:
+    description: Risk, liquidity or management limit.
+  Control:
+    description: Governance or operational control.
+  Report:
+    description: Treasury, regulatory or management report.
+  Model:
+    description: Analytical or regulatory model.
+  Owner:
+    description: Business or technical owner.
+
+relationship_types:
+  GOVERNS: {from: [Regulation, Policy], to: [Policy, Requirement, Metric, Calculation]}
+  DEFINES: {from: [Policy, Requirement], to: [Metric, Calculation, DataElement]}
+  CALCULATED_FROM: {from: [Metric, Calculation], to: [Calculation, DataElement, Position, Account]}
+  DEPENDS_ON: {from: [Metric, Calculation, Report, Model], to: [Metric, Calculation, DataElement, DataAsset, Scenario]}
+  SOURCED_FROM: {from: [DataElement, Position, Account], to: [DataAsset]}
+  REPORTED_IN: {from: [Metric, Calculation, DataElement], to: [Report]}
+  OWNED_BY: {from: [Policy, Metric, Calculation, DataAsset, Control, Report], to: [Owner]}
+  VALIDATED_BY: {from: [Metric, Calculation, DataAsset, Model], to: [Control]}
+  IMPACTS: {from: [Scenario, Product, Counterparty, LegalEntity, Currency], to: [Metric, Calculation, Limit, Report]}
+  EXPOSED_TO: {from: [LegalEntity, Counterparty, Position], to: [Counterparty, Currency, Product, Scenario]}
+  COLLATERALIZED_BY: {from: [Position, Account, Counterparty], to: [Collateral]}
+  SUPERSEDES: {from: [Policy, Regulation, Requirement], to: [Policy, Regulation, Requirement]}
+  EVIDENCED_BY: {from: [Policy, Metric, Calculation, DataElement, Control], to: [DataAsset]}
